@@ -1,15 +1,8 @@
-import os
-import sys
-
-parent_path = os.path.join(os.path.dirname(sys.argv[0]), os.pardir)
-absolute_parent_path = os.path.abspath(parent_path)
-sys.path.append(absolute_parent_path)
-
+import Support
 import unittest
 from mock import Mock
 import Stdio
 
-#print(dir(sys.stdin))
 class StdioTest(unittest.TestCase):
 	def setUp(self):
 		"""
@@ -23,10 +16,16 @@ class StdioTest(unittest.TestCase):
 		pass
 		#sys.stdin = self.originalStdin
 
+	"""
 	def testreadline(self):
+		pass
 		stdio = Stdio.Stdio()
 		s = stdio.read()
 		self.assertEqual('aaa', s)
+	"""
+
+def getTests():
+	return unittest.makeSuite(StdioTest)
 
 if __name__ == '__main__':
 	unittest.main()
