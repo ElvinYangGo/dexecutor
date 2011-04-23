@@ -1,10 +1,14 @@
 import socket
 import select
+from ChannelBuffer import ChannelBuffer
 
 class Reactor:
 	def __init__(self, ip, port):
 		self.initServerSock(ip, port)
 		self.input = [self.serverSock]
+		self.BUFFER_ENCODE = 'utf8'
+		self.RECV_SIZE = 4096
+		self.buffer = ChannelBuffer()
 
 	def initServerSock(self, ip, port):
 		self.serverSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -19,9 +23,9 @@ class Reactor:
 				self.input.append(newSock)
 				print('new connection: ', newAddress)
 			else:
-				data = sock.recv(1024)
+				data = sock.recv(self.RECV_SIZE)
 				if data:
-					print(data.decode('utf8'))
+					print(data.decode(self.BUFFER_ENCODE))
 					sock.send(data)
 				else:
 					sock.close()

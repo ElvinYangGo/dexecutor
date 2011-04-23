@@ -14,7 +14,7 @@ def getTests():
 
 	return suite
 
-if __name__ == '__main__':
+if '__main__' == __name__:
 	suite = getTests()
 	runner = unittest.TextTestRunner()
 	runner.run(suite)

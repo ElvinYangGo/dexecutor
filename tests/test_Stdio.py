@@ -27,6 +27,6 @@ class StdioTest(unittest.TestCase):
 def getTests():
 	return unittest.makeSuite(StdioTest)
 
-if __name__ == '__main__':
+if '__main__' == __name__:
 	unittest.main()
 
