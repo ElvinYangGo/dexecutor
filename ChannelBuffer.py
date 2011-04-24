@@ -1,9 +1,11 @@
 import struct
 
 class ChannelBuffer:
-	PACKET_HEAD_LENGTH = 4
-	def __init__(self):
-		self.buffer = bytearray()
+	def __init__(self, data=None):
+		if None != data:
+			self.buffer = bytearray(data)
+		else:
+			self.buffer = bytearray()
 
 	def readableBytes(self):
 		return len(self.buffer)
@@ -11,11 +13,21 @@ class ChannelBuffer:
 	def append(self, data):
 		self.buffer += data
 
-	def readBytes(self, size):
-		returnBuffer = self.buffer[:size]
-		self.buffer = self.buffer[size:]
+	def readBytes(self, length):
+		returnBuffer = self.buffer[:length]
+		self.buffer = self.buffer[length:]
 		return returnBuffer
 
+	def getAllBytes(self):
+		return self.buffer
+
+	def getBytes(self, length):
+		return self.buffer[:length]
+
+	def skipBytes(self, length):
+		self.buffer = self.buffer[length:]
+
+	"""
 	def extractPacket(self):
 		if ChannelBuffer.PACKET_HEAD_LENGTH < len(self.buffer):
 			if self.getPacketSize() <= len(self.buffer[ChannelBuffer.PACKET_HEAD_LENGTH:]):
@@ -27,3 +39,4 @@ class ChannelBuffer:
 		if ChannelBuffer.PACKET_HEAD_LENGTH <= len(self.buffer):
 			packetSize, = struct.unpack('!i', self.buffer[:ChannelBuffer.PACKET_HEAD_LENGTH])
 			return packetSize
+	"""
