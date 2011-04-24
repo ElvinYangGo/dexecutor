@@ -12,7 +12,7 @@ class Channel:
 	def getSocket(self):
 		return self.sock
 
-	def bufferReadableBytes(self):
+	def channelBufferReadableBytes(self):
 		return self.channelBuffer.readableBytes()
 
 	def appendBytes(self, data):

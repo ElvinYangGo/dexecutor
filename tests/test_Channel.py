@@ -16,14 +16,14 @@ class ChannelTest(unittest.TestCase):
 	def testGetSocket(self):
 		self.assertEqual(self.sock, self.channel.getSocket())
 
-	def testBufferReadableBytes(self):
-		self.assertEqual(0, self.channel.bufferReadableBytes())
+	def testChannelBufferReadableBytes(self):
+		self.assertEqual(0, self.channel.channelBufferReadableBytes())
 
 	def testAppendBytes(self):
 		self.channel.appendBytes(b'a')
-		self.assertEqual(1, self.channel.bufferReadableBytes())
+		self.assertEqual(1, self.channel.channelBufferReadableBytes())
 		self.channel.appendBytes(b'b')
-		self.assertEqual(2, self.channel.bufferReadableBytes())
+		self.assertEqual(2, self.channel.channelBufferReadableBytes())
 	
 	#def testDecodeBuffer(self):
 
