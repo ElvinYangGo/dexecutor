@@ -15,7 +15,7 @@ class Channel:
 	def bufferReadableBytes(self):
 		return self.channelBuffer.readableBytes()
 
-	def appendBuffer(self, data):
+	def appendBytes(self, data):
 		self.channelBuffer.append(data)
 	
 

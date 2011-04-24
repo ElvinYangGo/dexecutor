@@ -1,6 +1,7 @@
 import Support
 import unittest
 from Channel import Channel
+from BufferHeadDecoder import BufferHeadDecoder
 import struct
 
 class ChannelTest(unittest.TestCase):
@@ -18,11 +19,14 @@ class ChannelTest(unittest.TestCase):
 	def testBufferReadableBytes(self):
 		self.assertEqual(0, self.channel.bufferReadableBytes())
 
-	def testAppendBuffer(self):
-		self.channel.appendBuffer(b'a')
+	def testAppendBytes(self):
+		self.channel.appendBytes(b'a')
 		self.assertEqual(1, self.channel.bufferReadableBytes())
-		self.channel.appendBuffer(b'b')
+		self.channel.appendBytes(b'b')
 		self.assertEqual(2, self.channel.bufferReadableBytes())
+	
+	#def testDecodeBuffer(self):
+
 
 def getTests():
 	return unittest.makeSuite(ChannelTest)
