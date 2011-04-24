@@ -17,3 +17,5 @@ class Channel:
 
 	def appendBuffer(self, data):
 		self.channelBuffer.append(data)
+	
+

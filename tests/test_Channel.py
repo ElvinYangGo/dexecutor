@@ -1,6 +1,7 @@
 import Support
 import unittest
 from Channel import Channel
+import struct
 
 class ChannelTest(unittest.TestCase):
 	def setUp(self):
@@ -22,7 +23,6 @@ class ChannelTest(unittest.TestCase):
 		self.assertEqual(1, self.channel.bufferReadableBytes())
 		self.channel.appendBuffer(b'b')
 		self.assertEqual(2, self.channel.bufferReadableBytes())
-
 
 def getTests():
 	return unittest.makeSuite(ChannelTest)
