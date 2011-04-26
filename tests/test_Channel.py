@@ -25,9 +25,6 @@ class ChannelTest(unittest.TestCase):
 		self.channel.appendBytes(b'b')
 		self.assertEqual(2, self.channel.channelBufferReadableBytes())
 	
-	#def testDecodeBuffer(self):
-
-
 def getTests():
 	return unittest.makeSuite(ChannelTest)
 
