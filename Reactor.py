@@ -4,7 +4,6 @@ from Channel import Channel
 
 class Reactor:
 	def __init__(self, ip, port):
-		self.BUFFER_ENCODE = 'utf8'
 		self.RECV_SIZE = 4096
 		self.LISTEN_BACKLOG = 5
 
@@ -35,9 +34,9 @@ class Reactor:
 	def handleRead(self, sock):
 		data = sock.recv(self.RECV_SIZE)
 		if data:
-			print(data.decode(self.BUFFER_ENCODE))
 			sock.send(data)
-			self.channels[sock].appendBuffer(data)
+			self.channels[sock].appendBytes(data)
+			self.channels[sock].handleReceivedBuffer()
 		else:
 			sock.close()
 			self.inputSockets.remove(sock)
