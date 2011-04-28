@@ -8,3 +8,6 @@ class ChannelHandler:
 		data = channelBuffer.readAllBytes().decode('utf8')
 		print(data)
 		channel.write(ChannelBuffer(bytes(data, 'utf8')))
+
+	def channelClosed(self, channel):
+		print(channel.getAddress(), ' closed')

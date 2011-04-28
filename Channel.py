@@ -12,6 +12,7 @@ class Channel:
 		self.address = address
 		self.channelBuffer = ChannelBuffer()
 		self.channelHandler = ChannelHandler()
+		self.channelHandler.channelConnected(self)
 
 	def getAddress(self):
 		return self.address
@@ -32,3 +33,6 @@ class Channel:
 	def write(self, channelBuffer):
 		encodedBuffer = Channel.encoder.encode(channelBuffer)
 		self.sock.sendall(channelBuffer.readAllBytes())
+
+	def handleChannelClosed(self):
+		self.channelHandler.channelClosed(self)

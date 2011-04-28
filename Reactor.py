@@ -27,7 +27,6 @@ class Reactor:
 	def handleAccept(self):
 		newSock, newAddress = self.serverSock.accept()
 		self.inputSockets.append(newSock)
-		print('new connection: ', newAddress)
 		channel = Channel(newSock, newAddress)
 		self.channels[newSock] = channel
 
@@ -37,8 +36,14 @@ class Reactor:
 			self.channels[sock].appendBytes(data)
 			self.channels[sock].handleReceivedBuffer()
 		else:
-			sock.close()
-			self.inputSockets.remove(sock)
+			self.handleClose(sock)
+
+	def handleClose(self, sock):
+		self.channels[sock].handleChannelClosed()
+		del self.channels[sock]
+		self.inputSockets.remove(sock)
+		sock.close()
+
 
 if '__main__' == __name__:
 	reactor = Reactor('localhost', 23567)
