@@ -17,6 +17,12 @@ class ChannelBufferTest(unittest.TestCase):
 		data = bytes('abcde', 'utf8')
 		bufferWithInitializedData = ChannelBuffer(data)
 		self.assertEqual(data, bufferWithInitializedData.getAllBytes())
+
+	def testReadAllBytes(self):
+		data = bytes('abcde', 'utf8')
+		bufferWithInitializedData = ChannelBuffer(data)
+		self.assertEqual(data, bufferWithInitializedData.readAllBytes())
+		self.assertEqual(0, bufferWithInitializedData.readableBytes())
 	
 	def testGetBytes(self):
 		data = struct.pack('!i', 999)

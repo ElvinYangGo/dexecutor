@@ -34,7 +34,6 @@ class Reactor:
 	def handleRead(self, sock):
 		data = sock.recv(self.RECV_SIZE)
 		if data:
-			sock.send(data)
 			self.channels[sock].appendBytes(data)
 			self.channels[sock].handleReceivedBuffer()
 		else:

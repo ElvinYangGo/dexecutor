@@ -18,11 +18,14 @@ class ChannelBuffer:
 		self.buffer = self.buffer[length:]
 		return returnBuffer
 
-	def getAllBytes(self):
-		return self.buffer
+	def readAllBytes(self):
+		return self.readBytes(len(self.buffer))
 
 	def getBytes(self, length):
 		return self.buffer[:length]
+
+	def getAllBytes(self):
+		return self.buffer
 
 	def skipBytes(self, length):
 		self.buffer = self.buffer[length:]
