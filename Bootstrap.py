@@ -1,5 +1,4 @@
 import socket
-import select
 from Channel import Channel
 
 class Bootstrap:
@@ -7,18 +6,6 @@ class Bootstrap:
 		self.RECV_SIZE = 4096
 		self.channels = {}
 		self.inputSockets = []
-
-	def serveOnce(self):
-		inputReady, outputReady, exceptReady = select.select(self.inputSockets, [], [], 0)
-		for sock in inputReady:
-			if sock == self.serverSock:
-				self.handleAccept()
-			else:
-				self.handleRead(sock)
-
-	def serveForever(self):
-		while(True):
-			self.serveOnce()
 
 	def handleRead(self, sock):
 		data = sock.recv(self.RECV_SIZE)
