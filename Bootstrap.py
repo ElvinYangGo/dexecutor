@@ -24,6 +24,10 @@ class Reactor:
 			else:
 				self.handleRead(sock)
 
+	def serveForever(self):
+		while(True):
+			self.serveOnce()
+
 	def handleAccept(self):
 		newSock, newAddress = self.serverSock.accept()
 		self.inputSockets.append(newSock)
