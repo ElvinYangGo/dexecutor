@@ -11,6 +11,8 @@ class ClientBootstrap(Bootstrap):
 		clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		clientSocket.connect((ip, port))
 		self.inputSockets.append(clientSocket)
+		channel = Channel(clientSocket, (ip,port))
+		self.channels[clientSocket] = channel
 
 	def serveForever(self):
 		while(True):
