@@ -12,7 +12,7 @@ class ServerBootstrap(Bootstrap):
 		self.serverSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		self.serverSock.bind((ip, port))
 		self.serverSock.listen(self.LISTEN_BACKLOG)
-		self.inputSockets = [self.serverSock]
+		self.inputSockets.append(self.serverSock)
 
 	def handleAccept(self):
 		newSock, newAddress = self.serverSock.accept()

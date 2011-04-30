@@ -6,6 +6,7 @@ class Bootstrap:
 	def __init__(self):
 		self.RECV_SIZE = 4096
 		self.channels = {}
+		self.inputSockets = []
 
 	def serveOnce(self):
 		inputReady, outputReady, exceptReady = select.select(self.inputSockets, [], [], 0)
