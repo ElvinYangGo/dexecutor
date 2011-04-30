@@ -2,7 +2,7 @@ import socket
 import select
 from Channel import Channel
 
-class Reactor:
+class Bootstrap:
 	def __init__(self, ip, port):
 		self.RECV_SIZE = 4096
 		self.LISTEN_BACKLOG = 5
@@ -50,8 +50,8 @@ class Reactor:
 
 
 if '__main__' == __name__:
-	reactor = Reactor('localhost', 23567)
+	bootstrap = Bootstrap('localhost', 23567)
 	while True:
-		reactor.serveOnce()
+		bootstrap.serveOnce()
 		import time
 		time.sleep(0.5)
