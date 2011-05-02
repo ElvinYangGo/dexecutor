@@ -1,7 +1,6 @@
 import Support
 import unittest
 from Channel import Channel
-from BufferHeadDecoder import BufferHeadDecoder
 import struct
 
 class ChannelTest(unittest.TestCase):

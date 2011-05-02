@@ -1,18 +1,14 @@
 from ChannelBuffer import ChannelBuffer
-from BufferHeadDecoder import BufferHeadDecoder
-from BufferHeadEncoder import BufferHeadEncoder
 from ChannelHandler import ChannelHandler
+from ChannelPipeline import ChannelPipeline
 
 class Channel:
-	decoder = BufferHeadDecoder()
-	encoder = BufferHeadEncoder()
-
 	def __init__(self, sock, address):
 		self.sock = sock
 		self.address = address
 		self.channelBuffer = ChannelBuffer()
-		self.channelHandler = ChannelHandler()
-		self.channelHandler.channelConnected(self)
+		self.channelPipeline = ChannelPipeline(self, ChannelHandler())
+		self.channelPipeline.handleChannelConnected()
 
 	def getAddress(self):
 		return self.address
@@ -27,12 +23,10 @@ class Channel:
 		self.channelBuffer.append(data)
 	
 	def handleReceivedBuffer(self):
-		channelBuffer = Channel.decoder.decode(self.channelBuffer)
-		self.channelHandler.messageReceived(self, channelBuffer)
+		self.channelPipeline.handleReceivedBuffer(self.channelBuffer)
 	
 	def write(self, channelBuffer):
-		encodedBuffer = Channel.encoder.encode(channelBuffer)
-		self.sock.sendall(channelBuffer.readAllBytes())
+		self.channelPipeline.handleWrite(channelBuffer, self.sock)
 
 	def handleChannelClosed(self):
-		self.channelHandler.channelClosed(self)
+		self.channelPipeline.handleChannelClosed()
