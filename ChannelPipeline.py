@@ -5,9 +5,11 @@ class ChannelPipeline:
 	decoder = BufferHeadDecoder()
 	encoder = BufferHeadEncoder()
 
-	def __init__(self, channel, *args):
+	def __init__(self, handlers):
+		self.handlers = handlers
+	
+	def setChannel(self, channel):
 		self.channel = channel
-		self.handlers = args
 
 	def handlerCount(self):
 		return len(self.handlers)

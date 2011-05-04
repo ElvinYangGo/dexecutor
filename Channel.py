@@ -7,8 +7,6 @@ class Channel:
 		self.sock = sock
 		self.address = address
 		self.channelBuffer = ChannelBuffer()
-		self.channelPipeline = ChannelPipeline(self, ChannelHandler())
-		self.channelPipeline.handleChannelConnected()
 
 	def getAddress(self):
 		return self.address
@@ -16,11 +14,17 @@ class Channel:
 	def getSocket(self):
 		return self.sock
 
+	def setChannelPipeline(self, channelPipeline):
+		self.channelPipeline = channelPipeline
+
 	def channelBufferReadableBytes(self):
 		return self.channelBuffer.readableBytes()
 
 	def appendBytes(self, data):
 		self.channelBuffer.append(data)
+	
+	def handleConnected(self):
+		self.channelPipeline.handleChannelConnected()
 	
 	def handleReceivedBuffer(self):
 		self.channelPipeline.handleReceivedBuffer(self.channelBuffer)

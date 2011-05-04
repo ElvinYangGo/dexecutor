@@ -7,6 +7,9 @@ class Bootstrap:
 		self.channels = {}
 		self.inputSockets = []
 
+	def setPipelineFactory(self, channelPipelineFactory):
+		self.channelPipelineFactory = channelPipelineFactory
+
 	def handleRead(self, sock):
 		data = sock.recv(self.RECV_SIZE)
 		if data:

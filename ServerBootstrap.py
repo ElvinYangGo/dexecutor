@@ -2,6 +2,8 @@ import socket
 import select
 from Bootstrap import Bootstrap
 from Channel import Channel
+from ChannelPipelineFactory import ChannelPipelineFactory
+from ChannelHandler import ChannelHandler
 
 class ServerBootstrap(Bootstrap):
 	def __init__(self, ip, port):
@@ -27,10 +29,15 @@ class ServerBootstrap(Bootstrap):
 		newSock, newAddress = self.serverSocket.accept()
 		self.inputSockets.append(newSock)
 		channel = Channel(newSock, newAddress)
+		channelPipeline = self.channelPipelineFactory.createChannelPipeline()
+		channelPipeline.setChannel(channel)
+		channel.setChannelPipeline(channelPipeline)
 		self.channels[newSock] = channel
+		channel.handleConnected()
 
 if '__main__' == __name__:
 	serverBootstrap = ServerBootstrap('localhost', 23567)
+	serverBootstrap.setPipelineFactory(ChannelPipelineFactory(ChannelHandler()))
 	while True:
 		serverBootstrap.serveOnce()
 		import time
