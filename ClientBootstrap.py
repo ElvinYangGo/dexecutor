@@ -1,11 +1,13 @@
 import socket
 import select
 from Bootstrap import Bootstrap
+from Channel import Channel
+from ChannelPipelineFactory import ChannelPipelineFactory
+from ClientChannelHandler import ClientChannelHandler
 
 class ClientBootstrap(Bootstrap):
-	def __init__(self, ip, port):
+	def __init__(self):
 		Bootstrap.__init__(self)
-		self.connect(ip, port)
 
 	def connect(self, ip, port):
 		clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -15,6 +17,7 @@ class ClientBootstrap(Bootstrap):
 		channelPipeline = self.channelPipelineFactory.createChannelPipeline()
 		self.relateChannelWithPipeline(channel, channelPipeline)
 		self.channels[clientSocket] = channel
+		channel.handleConnected()
 
 	def serveForever(self):
 		while(True):
@@ -23,6 +26,7 @@ class ClientBootstrap(Bootstrap):
 				self.handleRead(sock)
 
 if '__main__' == __name__:
-	clientBootstrap = ClientBootstrap('127.0.0.1', 23567)
-	clientBootstrap.setPipelineFactory(ChannelPipelineFactory(ChannelHandler()))
+	clientBootstrap = ClientBootstrap()
+	clientBootstrap.setPipelineFactory(ChannelPipelineFactory(ClientChannelHandler()))
+	clientBootstrap.connect('localhost', 23567)
 	clientBootstrap.serveForever()

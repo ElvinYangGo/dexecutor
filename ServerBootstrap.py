@@ -6,9 +6,8 @@ from ChannelPipelineFactory import ChannelPipelineFactory
 from ChannelHandler import ChannelHandler
 
 class ServerBootstrap(Bootstrap):
-	def __init__(self, ip, port):
+	def __init__(self):
 		Bootstrap.__init__(self)
-		self.bindServer(ip, port)
 
 	def bindServer(self, ip, port):
 		self.LISTEN_BACKLOG = 5
@@ -35,8 +34,9 @@ class ServerBootstrap(Bootstrap):
 		channel.handleConnected()
 
 if '__main__' == __name__:
-	serverBootstrap = ServerBootstrap('localhost', 23567)
+	serverBootstrap = ServerBootstrap()
 	serverBootstrap.setPipelineFactory(ChannelPipelineFactory(ChannelHandler()))
+	serverBootstrap.bindServer('localhost', 23567)
 	while True:
 		serverBootstrap.serveOnce()
 		import time
