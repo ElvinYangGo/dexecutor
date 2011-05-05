@@ -1,3 +1,4 @@
+import copy
 from ChannelPipeline import ChannelPipeline
 
 class ChannelPipelineFactory:
@@ -8,4 +9,4 @@ class ChannelPipelineFactory:
 		return len(self.handlers)
 
 	def createChannelPipeline(self):
-		return ChannelPipeline(self.handlers)
+		return ChannelPipeline(copy.deepcopy(self.handlers))

@@ -12,6 +12,8 @@ class ClientBootstrap(Bootstrap):
 		clientSocket.connect((ip, port))
 		self.inputSockets.append(clientSocket)
 		channel = Channel(clientSocket, (ip,port))
+		channelPipeline = self.channelPipelineFactory.createChannelPipeline()
+		self.relateChannelWithPipeline(channel, channelPipeline)
 		self.channels[clientSocket] = channel
 
 	def serveForever(self):
@@ -22,4 +24,5 @@ class ClientBootstrap(Bootstrap):
 
 if '__main__' == __name__:
 	clientBootstrap = ClientBootstrap('127.0.0.1', 23567)
+	clientBootstrap.setPipelineFactory(ChannelPipelineFactory(ChannelHandler()))
 	clientBootstrap.serveForever()

@@ -30,8 +30,7 @@ class ServerBootstrap(Bootstrap):
 		self.inputSockets.append(newSock)
 		channel = Channel(newSock, newAddress)
 		channelPipeline = self.channelPipelineFactory.createChannelPipeline()
-		channelPipeline.setChannel(channel)
-		channel.setChannelPipeline(channelPipeline)
+		self.relateChannelWithPipeline(channel, channelPipeline)
 		self.channels[newSock] = channel
 		channel.handleConnected()
 

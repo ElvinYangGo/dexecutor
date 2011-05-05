@@ -10,6 +10,10 @@ class Bootstrap:
 	def setPipelineFactory(self, channelPipelineFactory):
 		self.channelPipelineFactory = channelPipelineFactory
 
+	def relateChannelWithPipeline(self, channel, channelPipeline):
+		channelPipeline.setChannel(channel)
+		channel.setChannelPipeline(channelPipeline)
+
 	def handleRead(self, sock):
 		data = sock.recv(self.RECV_SIZE)
 		if data:

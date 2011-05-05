@@ -9,7 +9,7 @@ class ChannelPipelineTest(unittest.TestCase):
 		self.sock = 123
 		self.address = ('127.0.0.1', 23567)
 		self.channel = Channel(self.sock, self.address)
-		self.channelPipeline = ChannelPipeline(ChannelHandler())
+		self.channelPipeline = ChannelPipeline((ChannelHandler(),))
 		self.channelPipeline.setChannel(self.channel)
 		self.channel.setChannelPipeline(self.channelPipeline)
 
