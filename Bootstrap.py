@@ -15,12 +15,17 @@ class Bootstrap:
 		channel.setChannelPipeline(channelPipeline)
 
 	def handleRead(self, sock):
-		data = sock.recv(self.RECV_SIZE)
-		if data:
-			self.channels[sock].appendBytes(data)
-			self.channels[sock].handleReceivedBuffer()
-		else:
+		try:
+			data = sock.recv(self.RECV_SIZE)
+		except socket.error as errorInstance:
+			print('errno: ', errorInstance.errno, ', ', errorInstance.strerror)
 			self.handleClose(sock)
+		else:
+			if data:
+				self.channels[sock].appendBytes(data)
+				self.channels[sock].handleReceivedBuffer()
+			else:
+				self.handleClose(sock)
 
 	def handleClose(self, sock):
 		self.channels[sock].handleChannelClosed()
