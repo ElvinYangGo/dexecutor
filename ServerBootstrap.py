@@ -3,7 +3,7 @@ import select
 from Bootstrap import Bootstrap
 from Channel import Channel
 from ChannelPipelineFactory import ChannelPipelineFactory
-from ChannelHandler import ChannelHandler
+from ServerChannelHandler import ServerChannelHandler
 
 class ServerBootstrap(Bootstrap):
 	def __init__(self):
@@ -35,7 +35,7 @@ class ServerBootstrap(Bootstrap):
 
 if '__main__' == __name__:
 	serverBootstrap = ServerBootstrap()
-	serverBootstrap.setPipelineFactory(ChannelPipelineFactory(ChannelHandler()))
+	serverBootstrap.setPipelineFactory(ChannelPipelineFactory(ServerChannelHandler()))
 	serverBootstrap.bindServer('localhost', 23567)
 	while True:
 		serverBootstrap.serveOnce()
