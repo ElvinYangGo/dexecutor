@@ -1,12 +1,17 @@
 import ftplib
+import pickle
+from ChannelBuffer import ChannelBuffer
+from FtpCommandExecutor import FtpCommandExecutor
 
-class ClientFtpCommandExecutor:
+class ClientFtpCommandExecutor(FtpCommandExecutor):
 	def handleCommand(self, channel, command):
-		if command['ID'] == 'FtpData':
-			self.ftpDataReceived(channel, command['Data'])
+		if command['ID'] == 'FtpLoginDataNotify':
+			self.ftpLoginDataReceived(channel, command['Data'])
 
-	def ftpDataReceived(self, channel, ftpData):
-		ftpHandler = ftplib.FTP(ftpData['ip'], ftpData['userName'], ftpData['password'])
+	def ftpLoginDataReceived(self, channel, ftpData):
+		ftpHandler = ftplib.FTP(ftpData['IP'], ftpData['UserName'], ftpData['Password'])
 		fileList = ftpHandler.nlst()
 		print(fileList)
+		command = {'ID':'FtpLoginDataReceived'}
+		channel.write(self.createChannelBuffer(command))
 

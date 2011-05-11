@@ -1,22 +1,25 @@
 import pickle
 from ChannelBuffer import ChannelBuffer
+from FtpCommandExecutor import FtpCommandExecutor
 
-class ServerFtpCommandExecutor:
+class ServerFtpCommandExecutor(FtpCommandExecutor):
+	def handleCommand(self, channel, command):
+		if command['ID'] == 'FtpLoginDataReceived':
+			self.ftpLoginDataReceived(channel)
+
 	def sendFtpLoginData(self, channel):
 		ftpData = {
-				'ip':'127.0.0.1', 
-				'port':21,
-				'userName':'test',
-				'password':'test'
+				'IP':'127.0.0.1', 
+				'Port':21,
+				'UserName':'test',
+				'Password':'test'
 				}
 		command = {
-				'ID':'FtpData',
+				'ID':'FtpLoginDataNotify',
 				'Data':ftpData
 				}
-		message = {
-				'Type':'Ftp',
-				'Command':command
-				}
-		pickleBytes = pickle.dumps(message)
-		channel.write(ChannelBuffer(pickleBytes))
+		channel.write(self.createChannelBuffer(command))
 
+	def ftpLoginDataReceived(self, channel):
+		print('client received ftp login data')
+		dirData = {'Dir':'test'}
