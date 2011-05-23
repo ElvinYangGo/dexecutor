@@ -23,3 +23,8 @@ class ServerFtpCommandExecutor(FtpCommandExecutor):
 	def ftpLoginDataReceived(self, channel):
 		print('client received ftp login data')
 		dirData = {'Dir':'test'}
+		command = {
+				'ID':'FtpFolderNotify',
+				'Data':dirData
+				}
+		channel.write(self.createChannelBuffer(command))
