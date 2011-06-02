@@ -2,19 +2,32 @@ import Support
 import unittest
 from ChannelHandler import ChannelHandler
 from Channel import Channel
+from ClientFtpCommandExecutor import ClientFtpCommandExecutor
+from mock import Mock
+import pickle
+from ChannelBuffer import ChannelBuffer
 
 class ChannelHandlerTest(unittest.TestCase):
 	def setUp(self):
-		self.sock = 123
-		self.address = ('127.0.0.1', 23567)
-		self.channel = Channel(self.sock, self.address)
+		self.channelHandler = ChannelHandler()
+		self.ftpExecutor = Mock()
+		self.ftpExecutor.handleCommand = Mock()
+		self.channelHandler.registerExecutor('Ftp', self.ftpExecutor)
+
+	def testRegisterExecutor(self):
+		self.assertEqual(1, len(self.channelHandler.executors))
 
 	def testMessageReceived(self):
-		pass
+		command = {'ID':'FtpLoginDataReceived'}
+		message = {
+				'Type':'Ftp',
+				'Command':command
+				}
+		pickleBytes = pickle.dumps(message)
+		channel = Mock()
+		self.channelHandler.messageReceived(channel, ChannelBuffer(pickleBytes))
+		self.ftpExecutor.handleCommand.assert_called_with(channel, command)
 
-	def testChannelConnected(self):
-		channelHandler = ChannelHandler()
-		channelHandler.channelConnected(self.channel)
 
 def getTests():
 	return unittest.makeSuite(ChannelHandlerTest)

@@ -6,17 +6,13 @@ from ServerFtpCommandExecutor import ServerFtpCommandExecutor
 
 class ServerChannelHandler(ChannelHandler):
 	def __init__(self):
+		ChannelHandler.__init__(self)
 		self.serverFtpCommandExecutor = ServerFtpCommandExecutor()
+		self.registerExecutor('Ftp', self.serverFtpCommandExecutor)
 
 	def channelConnected(self, channel):
 		print(channel.getAddress(), ' connected')
 		self.serverFtpCommandExecutor.sendFtpLoginData(channel)
-
-	def messageReceived(self, channel, channelBuffer):
-		message = pickle.loads(channelBuffer.readAllBytes())
-		print(message)
-		if message['Type'] == 'Ftp':
-			self.serverFtpCommandExecutor.handleCommand(channel, message['Command'])
 
 	def channelClosed(self, channel):
 		print(channel.getAddress(), ' closed')
