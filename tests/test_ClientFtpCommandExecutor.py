@@ -18,16 +18,6 @@ class ClientFtpCommandExecutorTest(unittest.TestCase):
 		self.clientFtpCommandExecutor = ClientFtpCommandExecutor()
 		self.clientFtpCommandExecutor.ftpHandler = self.ftpHandler
 
-	def testHandleCommand(self):
-		command = {
-				'ID':'FtpLoginDataNotify',
-				'Data':self.ftpData
-				}
-		self.clientFtpCommandExecutor.ftpLoginDataReceived = Mock()
-		self.clientFtpCommandExecutor.registerHandler('FtpLoginDataNotify', self.clientFtpCommandExecutor.ftpLoginDataReceived)
-		self.clientFtpCommandExecutor.handleCommand(self.channel, command)
-		self.clientFtpCommandExecutor.ftpLoginDataReceived.assert_called_with(self.channel, command['Data'])
-
 	def testFtpDirectoryDataReceived(self):
 		dirData = {'Dir':'ftp_test'}
 		self.clientFtpCommandExecutor.ftpDirectoryDataReceived(self.channel, dirData)

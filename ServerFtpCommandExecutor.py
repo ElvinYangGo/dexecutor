@@ -1,11 +1,11 @@
 import pickle
 from ChannelBuffer import ChannelBuffer
-from FtpCommandExecutor import FtpCommandExecutor
+from CommandExecutor import CommandExecutor
 
-class ServerFtpCommandExecutor(FtpCommandExecutor):
-	def handleCommand(self, channel, command):
-		if command['ID'] == 'FtpLoginDataReceived':
-			self.ftpLoginDataReceived(channel)
+class ServerFtpCommandExecutor(CommandExecutor):
+	def __init__(self):
+		CommandExecutor.__init__(self)
+		self.registerHandler('FtpLoginDataReceived', self.ftpLoginDataReceived)
 
 	def sendFtpLoginData(self, channel):
 		ftpData = {
@@ -18,13 +18,13 @@ class ServerFtpCommandExecutor(FtpCommandExecutor):
 				'ID':'FtpLoginDataNotify',
 				'Data':ftpData
 				}
-		channel.write(self.createChannelBuffer(command))
+		channel.write(self.createChannelBuffer('Ftp', command))
 
-	def ftpLoginDataReceived(self, channel):
+	def ftpLoginDataReceived(self, channel, data):
 		print('client received ftp login data')
 		dirData = {'Dir':'test'}
 		command = {
 				'ID':'FtpFolderNotify',
 				'Data':dirData
 				}
-		channel.write(self.createChannelBuffer(command))
+		channel.write(self.createChannelBuffer('Ftp', command))
