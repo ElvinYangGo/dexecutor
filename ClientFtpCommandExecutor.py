@@ -7,19 +7,22 @@ import os
 class ClientFtpCommandExecutor(CommandExecutor):
 	def __init__(self):
 		CommandExecutor.__init__(self)
-		self.registerHandler('FtpLoginDataNotify', self.ftpLoginDataReceived)
-		self.registerHandler('FtpDirectoryNotify', self.ftpDirectoryDataReceived)
+		self.registerHandler('FtpLoginDataNotify', self.onFtpLoginDataNotify)
+		self.registerHandler('FtpDirectoryNotify', self.onFtpDirectoryNotify)
+		self.messageType = 'Ftp'
 
-	def ftpLoginDataReceived(self, channel, ftpData):
+	def onFtpLoginDataNotify(self, channel, ftpData):
 		self.ftpHandler = ftplib.FTP(ftpData['IP'], ftpData['UserName'], ftpData['Password'])
 		command = {'ID':'FtpLoginDataReceived', 'Data':None}
-		channel.write(self.createChannelBuffer('Ftp', command))
+		channel.write(self.createChannelBuffer(self.messageType, command))
 
-	def ftpDirectoryDataReceived(self, channel, dirData):
+	def onFtpDirectoryNotify(self, channel, dirData):
 		self.ftpDirectory = dirData['Dir']
 		self.createDirectory(self.ftpDirectory)
 		fileList = self.ftpHandler.nlst(self.ftpDirectory)
 		self.storeFtpFiles(fileList)
+		command = {'ID':'FtpDirectoryReceived', 'Data':None}
+		channel.write(self.createChannelBuffer(self.messageType, command))
 
 	def createDirectory(self, directoryName):
 		if not os.path.exists(directoryName):

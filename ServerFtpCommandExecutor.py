@@ -5,7 +5,9 @@ from CommandExecutor import CommandExecutor
 class ServerFtpCommandExecutor(CommandExecutor):
 	def __init__(self):
 		CommandExecutor.__init__(self)
-		self.registerHandler('FtpLoginDataReceived', self.ftpLoginDataReceived)
+		self.registerHandler('FtpLoginDataReceived', self.onFtpLoginDataReceived)
+		self.registerHandler('FtpDirectoryReceived', self.onFtpDirectoryReceived)
+		self.messageType = 'Ftp'
 
 	def sendFtpLoginData(self, channel):
 		ftpData = {
@@ -18,13 +20,17 @@ class ServerFtpCommandExecutor(CommandExecutor):
 				'ID':'FtpLoginDataNotify',
 				'Data':ftpData
 				}
-		channel.write(self.createChannelBuffer('Ftp', command))
+		channel.write(self.createChannelBuffer(self.messageType, command))
 
-	def ftpLoginDataReceived(self, channel, data):
-		print('client received ftp login data')
-		dirData = {'Dir':'test'}
+	def onFtpLoginDataReceived(self, channel, data):
+		dirData = {'Dir':'ftp_test'}
 		command = {
 				'ID':'FtpDirectoryNotify',
 				'Data':dirData
 				}
-		channel.write(self.createChannelBuffer('Ftp', command))
+		channel.write(self.createChannelBuffer(self.messageType, command))
+	
+	def onFtpDirectoryReceived(self, channel, data):
+		#command = {'ID':'ProgramCommandNotify', 'Data':'dir'}
+		command = {'ID':'ProgramCommandNotify', 'Data':'ftp_test\\uu.exe'}
+		channel.write(self.createChannelBuffer('ProgramCommand', command))

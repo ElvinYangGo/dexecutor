@@ -18,9 +18,9 @@ class ClientFtpCommandExecutorTest(unittest.TestCase):
 		self.clientFtpCommandExecutor = ClientFtpCommandExecutor()
 		self.clientFtpCommandExecutor.ftpHandler = self.ftpHandler
 
-	def testFtpDirectoryDataReceived(self):
+	def testOnFtpDirectoryNotify(self):
 		dirData = {'Dir':'ftp_test'}
-		self.clientFtpCommandExecutor.ftpDirectoryDataReceived(self.channel, dirData)
+		self.clientFtpCommandExecutor.onFtpDirectoryNotify(self.channel, dirData)
 		self.assertTrue(os.path.exists('ftp_test'))
 
 	def testCreateDirectory(self):

@@ -7,5 +7,5 @@ class ServerProgramCommandExecutor(CommandExecutor):
 		self.messageType = 'ProgramCommand'
 
 	def sendProgramCommand(self, channel):
-		command = {'ID':'ListDirectory', 'Data':'notepad.exe'}
+		command = {'ID':'ProgramCommandNotify', 'Data':'dir'}
 		channel.write(self.createChannelBuffer(self.messageType, command))

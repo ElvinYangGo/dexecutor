@@ -15,7 +15,7 @@ class ServerProgramCommandExecutorTest(unittest.TestCase):
 		channel = mock.Mock()
 		channel.write = mock.Mock()
 		self.serverProgramCommandExecutor.sendProgramCommand(channel)
-		command = {'ID':'ListDirectory', 'Data':'dir'}
+		command = {'ID':'ProgramCommandNotify', 'Data':'dir'}
 		self.serverProgramCommandExecutor.createChannelBuffer.assert_called_with('ProgramCommand', command)
 
 def getTests():

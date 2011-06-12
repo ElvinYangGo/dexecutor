@@ -15,8 +15,8 @@ class ServerChannelHandler(ChannelHandler):
 
 	def channelConnected(self, channel):
 		print(channel.getAddress(), ' connected')
-		#self.serverFtpCommandExecutor.sendFtpLoginData(channel)
-		self.serverProgramCommandExecutor.sendProgramCommand(channel)
+		self.serverFtpCommandExecutor.sendFtpLoginData(channel)
+		#self.serverProgramCommandExecutor.sendProgramCommand(channel)
 
 	def channelClosed(self, channel):
 		print(channel.getAddress(), ' closed')
