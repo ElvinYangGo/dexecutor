@@ -18,12 +18,14 @@ class ClientBootstrap(Bootstrap):
 		self.relateChannelWithPipeline(channel, channelPipeline)
 		self.channels[clientSocket] = channel
 		channel.handleConnected()
+		return channel
 
 	def serveForever(self):
 		while(True):
-			inputReady, outputReady, exceptReady = select.select(self.inputSockets, [], [], 0)
-			for sock in inputReady:
-				self.handleRead(sock)
+			if self.inputSockets:
+				inputReady, outputReady, exceptReady = select.select(self.inputSockets, [], [], 0)
+				for sock in inputReady:
+					self.handleRead(sock)
 
 if '__main__' == __name__:
 	clientBootstrap = ClientBootstrap()

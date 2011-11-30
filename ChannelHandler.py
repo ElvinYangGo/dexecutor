@@ -1,4 +1,3 @@
-from ChannelBuffer import ChannelBuffer
 import pickle
 
 class ChannelHandler:
@@ -12,12 +11,15 @@ class ChannelHandler:
 	def messageReceived(self, channel, channelBuffer):
 		message = pickle.loads(channelBuffer.readAllBytes())
 		print(message)
-		messageType = message['Type']
-		self.executors[messageType].handleCommand(channel, message['Command'])
-
+		messageID = message['ID']
+		self.executors[messageID].handleCommand(channel, message['Data'])
+		executor = self.executors.get(messageID)
+		if executor != None:
+			executor.onMessage(channel, message['Data'])		
+	
 	def channelClosed(self, channel):
 		pass
 #		print(channel.getAddress(), ' closed')
 
-	def registerExecutor(self, messageType, executor):
-		self.executors[messageType] = executor
+	def registerExecutor(self, messageID, executor):
+		self.executors[messageID] = executor

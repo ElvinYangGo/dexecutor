@@ -6,7 +6,7 @@ import os
 def getInputAndSendToSock(sock):
 	while True:
 		lineData = sys.stdin.readline()
-		sock.sendall(lineData.encode('ascii'))
+		sock.sendall(lineData.replace('\n', '').encode('ascii'))
 		'''
 		while 0 < len(lineData):
 			sentSize = sock.send(lineData.encode('ascii'))

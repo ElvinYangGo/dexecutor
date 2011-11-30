@@ -1,18 +1,15 @@
-import pickle
-import ftplib
 from ChannelHandler import ChannelHandler
-from ChannelBuffer import ChannelBuffer
-from Channel import Channel
-from ClientFtpCommandExecutor import ClientFtpCommandExecutor
-from ClientProgramCommandExecutor import ClientProgramCommandExecutor
+from Protocol import Protocol
+from ClientFtpDownloadingNotifyExecutor import ClientFtpDownloadingNotify 
+from ClientFtpLoginDataNotifyExecutor import ClientFtpLoginDataNotifyExecutor 
+from ClientCommandNotifyExecutor import ClientCommandNotifyExecutor
 
 class ClientChannelHandler(ChannelHandler):
 	def __init__(self):
 		ChannelHandler.__init__(self)
-		self.clientFtpCommandExecutor = ClientFtpCommandExecutor()
-		self.clientProgramCommandExecutor = ClientProgramCommandExecutor()
-		self.registerExecutor('Ftp', self.clientFtpCommandExecutor)
-		self.registerExecutor('ProgramCommand', self.clientProgramCommandExecutor)
+		self.registerExecutor(Protocol.FTP_LOGIN_DATA_NOTIFY, ClientFtpLoginDataNotifyExecutor())
+		self.registerExecutor(Protocol.FTP_DOWNLOADING_NOTIFY, ClientFtpDownloadingNotify())
+		self.registerExecutor(Protocol.COMMAND_NOTIFY, ClientCommandNotifyExecutor())
 
 	def channelConnected(self, channel):
 		print(channel.getAddress(), ' connected')

@@ -1,12 +1,14 @@
+"""
 import pickle
 from ChannelBuffer import ChannelBuffer
 from CommandExecutor import CommandExecutor
+from ChannelBufferFactory import ChannelBufferFactory
 
 class ServerFtpCommandExecutor(CommandExecutor):
 	def __init__(self):
 		CommandExecutor.__init__(self)
 		self.registerHandler('FtpLoginDataReceived', self.onFtpLoginDataReceived)
-		self.registerHandler('FtpDirectoryReceived', self.onFtpDirectoryReceived)
+		#self.registerHandler('FtpDirectoryReceived', self.onFtpDirectoryReceived)
 		self.messageType = 'Ftp'
 
 	def sendFtpLoginData(self, channel):
@@ -20,7 +22,7 @@ class ServerFtpCommandExecutor(CommandExecutor):
 				'ID':'FtpLoginDataNotify',
 				'Data':ftpData
 				}
-		channel.write(self.createChannelBuffer(self.messageType, command))
+		channel.write(ChannelBufferFactory.createChannelBuffer(self.messageType, command))
 
 	def onFtpLoginDataReceived(self, channel, data):
 		dirData = {'Dir':'ftp_test'}
@@ -28,9 +30,10 @@ class ServerFtpCommandExecutor(CommandExecutor):
 				'ID':'FtpDirectoryNotify',
 				'Data':dirData
 				}
-		channel.write(self.createChannelBuffer(self.messageType, command))
+		channel.write(ChannelBufferFactory.createChannelBuffer(self.messageType, command))
 	
 	def onFtpDirectoryReceived(self, channel, data):
 		#command = {'ID':'ProgramCommandNotify', 'Data':'dir'}
 		command = {'ID':'ProgramCommandNotify', 'Data':'ftp_test\\uu.exe'}
-		channel.write(self.createChannelBuffer('ProgramCommand', command))
+		channel.write(ChannelBufferFactory.createChannelBuffer('ProgramCommand', command))
+"""

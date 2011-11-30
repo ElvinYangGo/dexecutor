@@ -4,10 +4,12 @@ from Bootstrap import Bootstrap
 from Channel import Channel
 from ChannelPipelineFactory import ChannelPipelineFactory
 from ServerChannelHandler import ServerChannelHandler
+from Stdio import Stdio
 
 class ServerBootstrap(Bootstrap):
 	def __init__(self):
 		Bootstrap.__init__(self)
+		self.stdio = Stdio()
 
 	def bindServer(self, ip, port):
 		self.LISTEN_BACKLOG = 5

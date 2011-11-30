@@ -1,7 +1,9 @@
+"""
 import ftplib
 import pickle
 from ChannelBuffer import ChannelBuffer
 from CommandExecutor import CommandExecutor
+from ChannelBufferFactory import ChannelBufferFactory
 import os
 
 class ClientFtpCommandExecutor(CommandExecutor):
@@ -14,7 +16,7 @@ class ClientFtpCommandExecutor(CommandExecutor):
 	def onFtpLoginDataNotify(self, channel, ftpData):
 		self.ftpHandler = ftplib.FTP(ftpData['IP'], ftpData['UserName'], ftpData['Password'])
 		command = {'ID':'FtpLoginDataReceived', 'Data':None}
-		channel.write(self.createChannelBuffer(self.messageType, command))
+		channel.write(ChannelBufferFactory.createChannelBuffer(self.messageType, command))
 
 	def onFtpDirectoryNotify(self, channel, dirData):
 		self.ftpDirectory = dirData['Dir']
@@ -22,7 +24,7 @@ class ClientFtpCommandExecutor(CommandExecutor):
 		fileList = self.ftpHandler.nlst(self.ftpDirectory)
 		self.storeFtpFiles(fileList)
 		command = {'ID':'FtpDirectoryReceived', 'Data':None}
-		channel.write(self.createChannelBuffer(self.messageType, command))
+		channel.write(ChannelBufferFactory.createChannelBuffer(self.messageType, command))
 
 	def createDirectory(self, directoryName):
 		if not os.path.exists(directoryName):
@@ -36,3 +38,4 @@ class ClientFtpCommandExecutor(CommandExecutor):
 		f = open(fileName, 'wb')
 		self.ftpHandler.retrbinary('RETR ' + fileName, f.write) 
 		f.close()
+"""

@@ -7,4 +7,5 @@ class ClientProgramCommandExecutor(CommandExecutor):
 		self.registerHandler('ProgramCommandNotify', self.onProgramCommandNotify)
 
 	def onProgramCommandNotify(self, channel, programData):
+		print(programData)
 		subprocess.Popen(programData)
