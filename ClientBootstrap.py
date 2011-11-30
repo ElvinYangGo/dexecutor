@@ -20,15 +20,15 @@ class ClientBootstrap(Bootstrap):
 		channel.handleConnected()
 		return channel
 
-	def serveForever(self):
-		while(True):
-			if self.inputSockets:
-				inputReady, outputReady, exceptReady = select.select(self.inputSockets, [], [], 0)
-				for sock in inputReady:
-					self.handleRead(sock)
+	def serveOnce(self):
+		if self.inputSockets:
+			inputReady, outputReady, exceptReady = select.select(self.inputSockets, [], [], 0)
+			for sock in inputReady:
+				self.handleRead(sock)
 
 if '__main__' == __name__:
 	clientBootstrap = ClientBootstrap()
 	clientBootstrap.setPipelineFactory(ChannelPipelineFactory(ClientChannelHandler()))
 	clientBootstrap.connect('localhost', 23567)
-	clientBootstrap.serveForever()
+	while True:
+		clientBootstrap.serveOnce()

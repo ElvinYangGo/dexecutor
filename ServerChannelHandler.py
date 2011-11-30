@@ -3,6 +3,7 @@ from Protocol import Protocol
 from ServerFtpLoginDataReceivedExecutor import ServerFtpLoginDataReceivedExecutor
 from ServerFtpDownloadingReceivedExecutor import ServerFtpDownloadingReceivedExecutor
 from ServerCommandReceivedExecutor import ServerCommandReceivedExecutor
+from ServerControllerCommandExecutor import ServerControllerCommandExecutor
 
 class ServerChannelHandler(ChannelHandler):
 	def __init__(self):
@@ -10,6 +11,7 @@ class ServerChannelHandler(ChannelHandler):
 		self.registerExecutor(Protocol.FTP_LOGIN_DATA_RECEIVED, ServerFtpLoginDataReceivedExecutor())
 		self.registerExecutor(Protocol.FTP_DOWNLOADING_RECEIVED, ServerFtpDownloadingReceivedExecutor())
 		self.registerExecutor(Protocol.COMMAND_RECEIVED, ServerCommandReceivedExecutor())
+		self.registerExecutor(Protocol.CONTROLLER_COMMAND_NOTIFY, ServerControllerCommandExecutor())
 
 	def channelConnected(self, channel):
 		print(channel.getAddress(), ' connected')

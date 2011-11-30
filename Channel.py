@@ -1,6 +1,4 @@
 from ChannelBuffer import ChannelBuffer
-from ChannelHandler import ChannelHandler
-from ChannelPipeline import ChannelPipeline
 
 class Channel:
 	def __init__(self, sock, address):

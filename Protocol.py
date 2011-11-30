@@ -7,3 +7,6 @@ class Protocol:
 	
 	COMMAND_NOTIFY = 'CommandNotify'
 	COMMAND_RECEIVED = 'CommandReceived'
+	
+	CONTROLLER_COMMAND_NOTIFY = 'ControllerCommandNotify'
+	CONTROLLER_COMMAND_RECEIVED = 'ControllerCommandNotify'

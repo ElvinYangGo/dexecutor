@@ -12,7 +12,6 @@ class ChannelHandler:
 		message = pickle.loads(channelBuffer.readAllBytes())
 		print(message)
 		messageID = message['ID']
-		self.executors[messageID].handleCommand(channel, message['Data'])
 		executor = self.executors.get(messageID)
 		if executor != None:
 			executor.onMessage(channel, message['Data'])		
