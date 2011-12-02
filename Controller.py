@@ -14,5 +14,6 @@ if '__main__' == __name__:
 		inputData = sys.stdin.readline()
 		command = {'ID':Protocol.CONTROLLER_COMMAND_NOTIFY, 'Data':inputData}
 		channel.write(ChannelBufferFactory.createChannelBuffer(command))
+		print('send: ', inputData)
 
 		

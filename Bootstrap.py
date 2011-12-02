@@ -1,5 +1,6 @@
 import socket
-from Channel import Channel
+from ChannelManager import ChannelManager
+from ChannelManager import channelManager
 
 class Bootstrap:
 	def __init__(self):
@@ -22,6 +23,7 @@ class Bootstrap:
 			self.handleClose(sock)
 		else:
 			if data:
+				print('recv: ', len(data))
 				self.channels[sock].appendBytes(data)
 				self.channels[sock].handleReceivedBuffer()
 			else:
@@ -29,6 +31,7 @@ class Bootstrap:
 
 	def handleClose(self, sock):
 		self.channels[sock].handleChannelClosed()
+		channelManager.removeChannel(self.channels[sock])
 		del self.channels[sock]
 		self.inputSockets.remove(sock)
 		sock.close()

@@ -21,9 +21,13 @@ class ChannelPipeline:
 		self.handlers[-1].channelClosed(self.channel)
 
 	def handleReceivedBuffer(self, channelBuffer):
-		preHandledBuffer = ChannelPipeline.decoder.decode(channelBuffer)
-		self.handlers[-1].messageReceived(self.channel, preHandledBuffer)
+		while True:
+			preHandledBuffer = ChannelPipeline.decoder.decode(channelBuffer)
+			if(preHandledBuffer == None):
+				break
+			self.handlers[-1].messageReceived(self.channel, preHandledBuffer)
 	
 	def handleWrite(self, channelBuffer, sock):
 		preHandledBuffer = ChannelPipeline.encoder.encode(channelBuffer)
+		print(preHandledBuffer.readableBytes())
 		sock.sendall(preHandledBuffer.readAllBytes())

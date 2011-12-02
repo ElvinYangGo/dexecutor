@@ -10,4 +10,5 @@ class BufferHeadDecoder:
 			if BufferHeadDecoder.PACKET_HEAD_LENGTH + packetLength <= channelBuffer.readableBytes():
 				channelBuffer.skipBytes(BufferHeadDecoder.PACKET_HEAD_LENGTH)
 				return ChannelBuffer(channelBuffer.readBytes(packetLength))
+		return None
 

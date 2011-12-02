@@ -11,6 +11,7 @@ class ClientBootstrap(Bootstrap):
 
 	def connect(self, ip, port):
 		clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		clientSocket.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
 		clientSocket.connect((ip, port))
 		self.inputSockets.append(clientSocket)
 		channel = Channel(clientSocket, (ip,port))

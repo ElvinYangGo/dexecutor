@@ -5,4 +5,4 @@ class ClientCommandNotifyExecutor(CommandExecutor):
 		CommandExecutor.__init__(self)
 		
 	def onMessage(self, channel, data):
-		pass
+		print(data)
