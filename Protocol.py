@@ -9,4 +9,4 @@ class Protocol:
 	COMMAND_RECEIVED = 'CommandReceived'
 	
 	CONTROLLER_COMMAND_NOTIFY = 'ControllerCommandNotify'
-	CONTROLLER_COMMAND_RECEIVED = 'ControllerCommandNotify'
+	CONTROLLER_COMMAND_RECEIVED = 'ControllerCommandReceived'

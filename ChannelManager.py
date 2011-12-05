@@ -10,10 +10,10 @@ class ChannelManager:
 	def removeChannel(self, channel):
 		self.channels = [item for item in self.channels if item is not channel]
 		
-	def sendToAllChannelsExcept(self, channel, data):
-		channelBuffer = ChannelBufferFactory.createChannelBuffer(data)
+	def sendToAllChannelsExcept(self, channel, commandID, commandData):
+		channelBuffer = ChannelBufferFactory.createChannelBuffer(commandID, commandData)
 		for item in self.channels:
 			if item is not channel:
 				item.write(channelBuffer)
-		
+				
 channelManager = ChannelManager()

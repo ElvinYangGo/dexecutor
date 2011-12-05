@@ -5,6 +5,6 @@ class ServerFtpLoginDataReceivedExecutor(CommandExecutor):
 		CommandExecutor.__init__(self)
 
 	def onMessage(self, channel, data):
-		pass
+		print('client got ftp login data')
 	
 	

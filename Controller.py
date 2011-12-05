@@ -12,8 +12,7 @@ if '__main__' == __name__:
 	while True:
 		clientBootstrap.serveOnce()
 		inputData = sys.stdin.readline()
-		command = {'ID':Protocol.CONTROLLER_COMMAND_NOTIFY, 'Data':inputData}
-		channel.write(ChannelBufferFactory.createChannelBuffer(command))
-		print('send: ', inputData)
+		inputData = inputData.replace('\n', '')
+		channel.write(ChannelBufferFactory.createChannelBuffer(Protocol.CONTROLLER_COMMAND_NOTIFY, inputData))
 
 		

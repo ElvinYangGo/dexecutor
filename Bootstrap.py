@@ -23,7 +23,6 @@ class Bootstrap:
 			self.handleClose(sock)
 		else:
 			if data:
-				print('recv: ', len(data))
 				self.channels[sock].appendBytes(data)
 				self.channels[sock].handleReceivedBuffer()
 			else:

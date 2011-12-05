@@ -29,5 +29,4 @@ class ChannelPipeline:
 	
 	def handleWrite(self, channelBuffer, sock):
 		preHandledBuffer = ChannelPipeline.encoder.encode(channelBuffer)
-		print(preHandledBuffer.readableBytes())
 		sock.sendall(preHandledBuffer.readAllBytes())

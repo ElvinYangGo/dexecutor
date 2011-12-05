@@ -1,0 +1,2 @@
+ftpLoginData = None
+ftp = None
