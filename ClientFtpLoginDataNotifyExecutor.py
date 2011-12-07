@@ -1,5 +1,4 @@
 from CommandExecutor import CommandExecutor
-import ftplib
 import ClientData
 from ChannelBufferFactory import ChannelBufferFactory
 from Protocol import Protocol

@@ -5,6 +5,7 @@ from ClientFtpLoginDataNotifyExecutor import ClientFtpLoginDataNotifyExecutor
 from ClientRunCommandNotifyExecutor import ClientRunCommandNotifyExecutor
 from ClientFtpUploadNotifyExecutor import ClientFtpUploadNotify
 from ClientConfigNotifyExecutor import ClientConfigNotifyExecutor
+from ClientStopCommandNotifyExecutor import ClientStopCommandNotifyExecutor
 
 class ClientChannelHandler(ChannelHandler):
 	def __init__(self):
@@ -13,6 +14,7 @@ class ClientChannelHandler(ChannelHandler):
 		self.registerExecutor(Protocol.FTP_DOWNLOAD_NOTIFY, ClientFtpDownloadNotify())
 		self.registerExecutor(Protocol.FTP_UPLOAD_NOTIFY, ClientFtpUploadNotify())
 		self.registerExecutor(Protocol.RUN_COMMAND_NOTIFY, ClientRunCommandNotifyExecutor())
+		self.registerExecutor(Protocol.STOP_COMMAND_NOTIFY, ClientStopCommandNotifyExecutor())
 		self.registerExecutor(Protocol.CONFIG_NOTIFY, ClientConfigNotifyExecutor())
 
 	def channelConnected(self, channel):

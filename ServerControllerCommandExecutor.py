@@ -10,6 +10,7 @@ class ServerControllerCommandExecutor(CommandExecutor):
 		self.dispatcher['download'] = self.onDownload
 		self.dispatcher['upload'] = self.onUpload
 		self.dispatcher['run'] = self.onRun
+		self.dispatcher['stop'] = self.onStop
 		
 	def onMessage(self, channel, data):
 		index = data.find(' ')
@@ -48,3 +49,5 @@ class ServerControllerCommandExecutor(CommandExecutor):
 	def onRun(self, channel, controllerData):
 		channelManager.sendToAllChannelsExcept(channel, Protocol.RUN_COMMAND_NOTIFY, controllerData)
 		
+	def onStop(self, channel, controllerData):
+		channelManager.sendToAllChannelsExcept(channel, Protocol.STOP_COMMAND_NOTIFY, controllerData)

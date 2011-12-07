@@ -11,7 +11,8 @@ class Protocol:
 	RUN_COMMAND_NOTIFY = 'RunCommandNotify'
 	RUN_COMMAND_RECEIVED = 'RunCommandReceived'
 	
-	
+	STOP_COMMAND_NOTIFY = 'StopCommandNotify'
+	STOP_COMMAND_RECEIVED = 'StopCommandReceived'
 	
 	CONTROLLER_COMMAND_NOTIFY = 'ControllerCommandNotify'
 	CONTROLLER_COMMAND_RECEIVED = 'ControllerCommandReceived'
