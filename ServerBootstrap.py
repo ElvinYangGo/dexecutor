@@ -32,7 +32,7 @@ class ServerBootstrap(Bootstrap):
 		newSock, newAddress = self.serverSocket.accept()
 		newSock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
 		self.inputSockets.append(newSock)
-		channel = Channel(newSock, newAddress)
+		channel = Channel(newSock, newAddress, channelManager.generatorID())
 		channelPipeline = self.channelPipelineFactory.createChannelPipeline()
 		self.relateChannelWithPipeline(channel, channelPipeline)
 		self.channels[newSock] = channel

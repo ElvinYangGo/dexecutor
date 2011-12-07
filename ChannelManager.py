@@ -3,6 +3,7 @@ from ChannelBufferFactory import ChannelBufferFactory
 class ChannelManager:
 	def __init__(self):
 		self.channels = []
+		self.id = 0
 		
 	def addChannel(self, channel):
 		self.channels.append(channel)
@@ -15,5 +16,9 @@ class ChannelManager:
 		for item in self.channels:
 			if item is not channel:
 				item.write(channelBuffer)
+				
+	def generatorID(self):
+		self.id += 1
+		return self.id
 				
 channelManager = ChannelManager()

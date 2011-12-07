@@ -1,7 +1,6 @@
 from CommandExecutor import CommandExecutor
 from ChannelManager import channelManager
 from Protocol import Protocol
-from ChannelBufferFactory import ChannelBufferFactory
 
 class ServerControllerCommandExecutor(CommandExecutor):
 	def __init__(self):
@@ -9,6 +8,7 @@ class ServerControllerCommandExecutor(CommandExecutor):
 		self.dispatcher = {}
 		self.dispatcher['send_ftp_data'] = self.onFtpLoginData
 		self.dispatcher['download'] = self.onDownload
+		self.dispatcher['upload'] = self.onUpload
 		self.dispatcher['run'] = self.onRun
 		
 	def onMessage(self, channel, data):
@@ -29,11 +29,6 @@ class ServerControllerCommandExecutor(CommandExecutor):
 		controllerCommandReceivedData = {'ID':Protocol.CONTROLLER_COMMAND_RECEIVED, 'Data':''}
 		channel.write(ChannelBufferFactory.createChannelBuffer(controllerCommandReceivedData))
 		"""
-		
-		"""
-		ToDo:
-		handle each command: ftp login data, download, run, stop
-		"""
 
 	def onFtpLoginData(self, channel, controllerData):
 		ftpData = {
@@ -45,7 +40,11 @@ class ServerControllerCommandExecutor(CommandExecutor):
 		channelManager.sendToAllChannelsExcept(channel, Protocol.FTP_LOGIN_DATA_NOTIFY, ftpData)
 
 	def onDownload(self, channel, controllerData):
-		channelManager.sendToAllChannelsExcept(channel, Protocol.FTP_DOWNLOADING_NOTIFY, controllerData)
+		channelManager.sendToAllChannelsExcept(channel, Protocol.FTP_DOWNLOAD_NOTIFY, controllerData)
 
+	def onUpload(self, channel, controllerData):
+		channelManager.sendToAllChannelsExcept(channel, Protocol.FTP_UPLOAD_NOTIFY, controllerData)
+	
 	def onRun(self, channel, controllerData):
 		channelManager.sendToAllChannelsExcept(channel, Protocol.COMMAND_NOTIFY, controllerData)
+		

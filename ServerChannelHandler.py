@@ -1,39 +1,26 @@
 from ChannelHandler import ChannelHandler
 from Protocol import Protocol
 from ServerFtpLoginDataReceivedExecutor import ServerFtpLoginDataReceivedExecutor
-from ServerFtpDownloadingReceivedExecutor import ServerFtpDownloadingReceivedExecutor
+from ServerFtpDownloadReceivedExecutor import ServerFtpDownloadReceivedExecutor
 from ServerCommandReceivedExecutor import ServerCommandReceivedExecutor
 from ServerControllerCommandExecutor import ServerControllerCommandExecutor
+from ServerFtpUploadReceivedExecutor import ServerFtpUploadReceivedExecutor
+from ServerConfigReceivedExecutor import ServerConfigReceivedExecutor
+from ChannelBufferFactory import ChannelBufferFactory
 
 class ServerChannelHandler(ChannelHandler):
 	def __init__(self):
 		ChannelHandler.__init__(self)
 		self.registerExecutor(Protocol.FTP_LOGIN_DATA_RECEIVED, ServerFtpLoginDataReceivedExecutor())
-		self.registerExecutor(Protocol.FTP_DOWNLOADING_RECEIVED, ServerFtpDownloadingReceivedExecutor())
+		self.registerExecutor(Protocol.FTP_DOWNLOAD_RECEIVED, ServerFtpDownloadReceivedExecutor())
+		self.registerExecutor(Protocol.FTP_UPLOAD_NOTIFY, ServerFtpUploadReceivedExecutor())
 		self.registerExecutor(Protocol.COMMAND_RECEIVED, ServerCommandReceivedExecutor())
 		self.registerExecutor(Protocol.CONTROLLER_COMMAND_NOTIFY, ServerControllerCommandExecutor())
+		self.registerExecutor(Protocol.CONFIG_RECEIVED, ServerConfigReceivedExecutor())
 
 	def channelConnected(self, channel):
 		print(channel.getAddress(), ' connected')
-		#self.sendProgramCommand(channel)
+		channel.write(ChannelBufferFactory.createChannelBuffer(Protocol.CONFIG_NOTIFY, channel.getID()))
 
 	def channelClosed(self, channel):
 		print(channel.getAddress(), ' closed')
-	"""
-	def sendFtpLoginData(self, channel):
-		ftpData = {
-				'IP':'127.0.0.1',
-				'Port':21,
-				'UserName':'test',
-				'Password':'test'
-				}
-		command = {
-				'ID':'FtpLoginDataNotify',
-				'Data':ftpData
-				}
-		channel.write(ChannelBufferFactory.createChannelBuffer('Ftp', command))
-
-	def sendProgramCommand(self, channel):
-		command = {'ID':'ProgramCommandNotify', 'Data':'cmd.exe /c dir'}
-		channel.write(ChannelBufferFactory.createChannelBuffer('ProgramCommand', command))
-	"""

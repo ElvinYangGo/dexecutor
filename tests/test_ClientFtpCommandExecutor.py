@@ -32,7 +32,7 @@ class ClientFtpCommandExecutorTest(unittest.TestCase):
 		fileAName = 'ftp_test\\a.txt'
 		fileBName = 'ftp_test\\b.txt'
 		fileList = [fileAName, fileBName]
-		self.clientFtpCommandExecutor.storeFtpFiles(fileList)
+		self.clientFtpCommandExecutor.saveFtpFiles(fileList)
 		fileA = open(fileAName, 'r')
 		fileB = open(fileBName, 'r')
 		fileA.close()
@@ -40,7 +40,7 @@ class ClientFtpCommandExecutorTest(unittest.TestCase):
 
 	def testStoreFtpFile(self):
 		fileName = 'ftp_test\\a.txt'
-		self.clientFtpCommandExecutor.storeFtpFile(fileName)
+		self.clientFtpCommandExecutor.saveFtpFile(fileName)
 		f = open('ftp_test\\a.txt', 'r')
 		f.close()
 

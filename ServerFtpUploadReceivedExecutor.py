@@ -1,9 +1,9 @@
 from CommandExecutor import CommandExecutor
 
-class ServerFtpDownloadingReceivedExecutor(CommandExecutor):
+class ServerFtpUploadReceivedExecutor(CommandExecutor):
 	def __init__(self):
 		CommandExecutor.__init__(self)
 		
 	def onMessage(self, channel, data):	
-		pass
+		print('client uploaded files')
 	

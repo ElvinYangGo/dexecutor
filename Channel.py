@@ -1,11 +1,15 @@
 from ChannelBuffer import ChannelBuffer
 
 class Channel:
-	def __init__(self, sock, address):
+	def __init__(self, sock, address, uniqueID=1):
 		self.sock = sock
 		self.address = address
+		self.uniqueID = uniqueID
 		self.channelBuffer = ChannelBuffer()
 
+	def getID(self):
+		return self.uniqueID
+		
 	def getAddress(self):
 		return self.address
 
