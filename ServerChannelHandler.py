@@ -2,7 +2,7 @@ from ChannelHandler import ChannelHandler
 from Protocol import Protocol
 from ServerFtpLoginDataReceivedExecutor import ServerFtpLoginDataReceivedExecutor
 from ServerFtpDownloadReceivedExecutor import ServerFtpDownloadReceivedExecutor
-from ServerCommandReceivedExecutor import ServerCommandReceivedExecutor
+from ServerRunCommandReceivedExecutor import ServerRunCommandReceivedExecutor
 from ServerControllerCommandExecutor import ServerControllerCommandExecutor
 from ServerFtpUploadReceivedExecutor import ServerFtpUploadReceivedExecutor
 from ServerConfigReceivedExecutor import ServerConfigReceivedExecutor
@@ -14,7 +14,7 @@ class ServerChannelHandler(ChannelHandler):
 		self.registerExecutor(Protocol.FTP_LOGIN_DATA_RECEIVED, ServerFtpLoginDataReceivedExecutor())
 		self.registerExecutor(Protocol.FTP_DOWNLOAD_RECEIVED, ServerFtpDownloadReceivedExecutor())
 		self.registerExecutor(Protocol.FTP_UPLOAD_NOTIFY, ServerFtpUploadReceivedExecutor())
-		self.registerExecutor(Protocol.COMMAND_RECEIVED, ServerCommandReceivedExecutor())
+		self.registerExecutor(Protocol.RUN_COMMAND_RECEIVED, ServerRunCommandReceivedExecutor())
 		self.registerExecutor(Protocol.CONTROLLER_COMMAND_NOTIFY, ServerControllerCommandExecutor())
 		self.registerExecutor(Protocol.CONFIG_RECEIVED, ServerConfigReceivedExecutor())
 

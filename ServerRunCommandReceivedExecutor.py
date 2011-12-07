@@ -1,6 +1,6 @@
 from CommandExecutor import CommandExecutor
 
-class ServerCommandReceivedExecutor(CommandExecutor):
+class ServerRunCommandReceivedExecutor(CommandExecutor):
 	def __init__(self):
 		CommandExecutor.__init__(self)
 		

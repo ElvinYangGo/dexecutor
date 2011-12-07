@@ -46,5 +46,5 @@ class ServerControllerCommandExecutor(CommandExecutor):
 		channelManager.sendToAllChannelsExcept(channel, Protocol.FTP_UPLOAD_NOTIFY, controllerData)
 	
 	def onRun(self, channel, controllerData):
-		channelManager.sendToAllChannelsExcept(channel, Protocol.COMMAND_NOTIFY, controllerData)
+		channelManager.sendToAllChannelsExcept(channel, Protocol.RUN_COMMAND_NOTIFY, controllerData)
 		

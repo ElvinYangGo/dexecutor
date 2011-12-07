@@ -1,15 +1,17 @@
 from CommandExecutor import CommandExecutor
 import subprocess
 import traceback
+import ClientData
 
-class ClientCommandNotifyExecutor(CommandExecutor):
+class ClientRunCommandNotifyExecutor(CommandExecutor):
 	def __init__(self):
 		CommandExecutor.__init__(self)
 		
 	def onMessage(self, channel, data):
 		print(data)
 		try:
-			subprocess.Popen(data)
+			ClientData.childProcess = subprocess.Popen(data)
+			print('execute command')
 		except BaseException:
 			traceback.print_exc()
 			

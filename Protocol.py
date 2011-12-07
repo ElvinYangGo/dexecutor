@@ -8,8 +8,10 @@ class Protocol:
 	FTP_UPLOAD_NOTIFY = 'FtpUploadNotify'
 	FTP_UPLOAD_RECEIVED = 'FtpUploadReceived'
 	
-	COMMAND_NOTIFY = 'CommandNotify'
-	COMMAND_RECEIVED = 'CommandReceived'
+	RUN_COMMAND_NOTIFY = 'RunCommandNotify'
+	RUN_COMMAND_RECEIVED = 'RunCommandReceived'
+	
+	
 	
 	CONTROLLER_COMMAND_NOTIFY = 'ControllerCommandNotify'
 	CONTROLLER_COMMAND_RECEIVED = 'ControllerCommandReceived'
