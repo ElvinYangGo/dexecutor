@@ -2,8 +2,6 @@ import socket
 import select
 from Bootstrap import Bootstrap
 from Channel import Channel
-from ChannelPipelineFactory import ChannelPipelineFactory
-from ClientChannelHandler import ClientChannelHandler
 
 class ClientBootstrap(Bootstrap):
 	def __init__(self):
@@ -26,10 +24,3 @@ class ClientBootstrap(Bootstrap):
 			inputReady, outputReady, exceptReady = select.select(self.inputSockets, [], [], 0)
 			for sock in inputReady:
 				self.handleRead(sock)
-
-if '__main__' == __name__:
-	clientBootstrap = ClientBootstrap()
-	clientBootstrap.setPipelineFactory(ChannelPipelineFactory(ClientChannelHandler()))
-	clientBootstrap.connect('localhost', 23567)
-	while True:
-		clientBootstrap.serveOnce()

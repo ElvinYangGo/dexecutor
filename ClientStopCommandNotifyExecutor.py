@@ -12,7 +12,6 @@ class ClientStopCommandNotifyExecutor(CommandExecutor):
 		print(data)
 		try:
 			ClientData.childProcess.terminate()
-			#ClientData.childProcess.kill()
 			print('stop command')
 		except BaseException:
 			traceback.print_exc()

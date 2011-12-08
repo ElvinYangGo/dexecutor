@@ -1,5 +1,4 @@
 import socket
-from ChannelManager import ChannelManager
 from ChannelManager import channelManager
 
 class Bootstrap:

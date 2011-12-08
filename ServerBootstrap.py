@@ -1,11 +1,7 @@
 import socket
 import select
-import time
 from Bootstrap import Bootstrap
 from Channel import Channel
-from ChannelPipelineFactory import ChannelPipelineFactory
-from ServerChannelHandler import ServerChannelHandler
-from ChannelManager import ChannelManager
 from ChannelManager import channelManager
 
 class ServerBootstrap(Bootstrap):
@@ -38,17 +34,3 @@ class ServerBootstrap(Bootstrap):
 		self.channels[newSock] = channel
 		channelManager.addChannel(channel)
 		channel.handleConnected()
-
-if '__main__' == __name__:
-	serverBootstrap = ServerBootstrap()
-	serverBootstrap.setPipelineFactory(ChannelPipelineFactory(ServerChannelHandler()))
-	serverBootstrap.bindServer('localhost', 23567)
-	while True:
-		serverBootstrap.serveOnce()
-
-		try:
-			time.sleep(0.5)
-		except KeyboardInterrupt:
-			print('interrupt')
-			break
-	print('shutdown')

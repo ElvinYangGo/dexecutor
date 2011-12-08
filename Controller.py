@@ -6,6 +6,7 @@ from ChannelBufferFactory import ChannelBufferFactory
 import sys
 
 if '__main__' == __name__:
+	print(sys.path)
 	clientBootstrap = ClientBootstrap()
 	clientBootstrap.setPipelineFactory(ChannelPipelineFactory(ControllerChannelHandler()))
 	channel = clientBootstrap.connect('localhost', 23567)
