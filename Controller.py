@@ -3,6 +3,7 @@ from common.ChannelPipelineFactory import ChannelPipelineFactory
 from controller.ControllerChannelHandler import ControllerChannelHandler 
 from common.Protocol import Protocol
 from common.ChannelBufferFactory import ChannelBufferFactory
+import sys
 
 if '__main__' == __name__:
 	clientBootstrap = ClientBootstrap()
