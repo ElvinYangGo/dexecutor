@@ -1,5 +1,5 @@
-from BufferHeadDecoder import BufferHeadDecoder
-from BufferHeadEncoder import BufferHeadEncoder
+from common.BufferHeadDecoder import BufferHeadDecoder
+from common.BufferHeadEncoder import BufferHeadEncoder
 
 class ChannelPipeline:
 	decoder = BufferHeadDecoder()

@@ -1,5 +1,4 @@
 import copy
-from ChannelHandler import ChannelHandler 
 
 class ChannelHandlerFactory:
 	def __init__(self, channelHandler):

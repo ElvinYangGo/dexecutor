@@ -1,11 +1,11 @@
-from ChannelHandler import ChannelHandler
-from Protocol import Protocol
-from ClientFtpDownloadNotifyExecutor import ClientFtpDownloadNotify 
-from ClientFtpLoginDataNotifyExecutor import ClientFtpLoginDataNotifyExecutor 
-from ClientRunCommandNotifyExecutor import ClientRunCommandNotifyExecutor
-from ClientFtpUploadNotifyExecutor import ClientFtpUploadNotify
-from ClientConfigNotifyExecutor import ClientConfigNotifyExecutor
-from ClientStopCommandNotifyExecutor import ClientStopCommandNotifyExecutor
+from common.ChannelHandler import ChannelHandler
+from common.Protocol import Protocol
+from client.ClientFtpDownloadNotifyExecutor import ClientFtpDownloadNotify 
+from client.ClientFtpLoginDataNotifyExecutor import ClientFtpLoginDataNotifyExecutor 
+from client.ClientRunCommandNotifyExecutor import ClientRunCommandNotifyExecutor
+from client.ClientFtpUploadNotifyExecutor import ClientFtpUploadNotify
+from client.ClientConfigNotifyExecutor import ClientConfigNotifyExecutor
+from client.ClientStopCommandNotifyExecutor import ClientStopCommandNotifyExecutor
 
 class ClientChannelHandler(ChannelHandler):
 	def __init__(self):

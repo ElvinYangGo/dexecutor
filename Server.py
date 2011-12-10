@@ -1,6 +1,6 @@
-from ServerBootstrap import ServerBootstrap
-from ChannelPipelineFactory import ChannelPipelineFactory
-from ServerChannelHandler import ServerChannelHandler
+from server.ServerBootstrap import ServerBootstrap
+from common.ChannelPipelineFactory import ChannelPipelineFactory
+from server.ServerChannelHandler import ServerChannelHandler
 import time
 
 if '__main__' == __name__:

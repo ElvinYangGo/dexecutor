@@ -1,12 +1,10 @@
-from ClientBootstrap import ClientBootstrap
-from ChannelPipelineFactory import ChannelPipelineFactory
-from ControllerChannelHandler import ControllerChannelHandler 
-from Protocol import Protocol
-from ChannelBufferFactory import ChannelBufferFactory
-import sys
+from client.ClientBootstrap import ClientBootstrap
+from common.ChannelPipelineFactory import ChannelPipelineFactory
+from controller.ControllerChannelHandler import ControllerChannelHandler 
+from common.Protocol import Protocol
+from common.ChannelBufferFactory import ChannelBufferFactory
 
 if '__main__' == __name__:
-	print(sys.path)
 	clientBootstrap = ClientBootstrap()
 	clientBootstrap.setPipelineFactory(ChannelPipelineFactory(ControllerChannelHandler()))
 	channel = clientBootstrap.connect('localhost', 23567)

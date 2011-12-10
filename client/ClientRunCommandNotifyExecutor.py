@@ -1,7 +1,7 @@
-from CommandExecutor import CommandExecutor
+from common.CommandExecutor import CommandExecutor
 import subprocess
 import traceback
-import ClientData
+from client import ClientData
 
 class ClientRunCommandNotifyExecutor(CommandExecutor):
 	def __init__(self):

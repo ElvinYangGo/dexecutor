@@ -1,4 +1,4 @@
-from CommandExecutor import CommandExecutor
+from common.CommandExecutor import CommandExecutor
 
 class ServerStopCommandReceivedExecutor(CommandExecutor):
 	def __init__(self):

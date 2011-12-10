@@ -1,7 +1,7 @@
 import socket
 import select
-from Bootstrap import Bootstrap
-from Channel import Channel
+from common.Bootstrap import Bootstrap
+from common.Channel import Channel
 
 class ClientBootstrap(Bootstrap):
 	def __init__(self):

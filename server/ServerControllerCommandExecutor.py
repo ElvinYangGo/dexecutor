@@ -1,6 +1,6 @@
-from CommandExecutor import CommandExecutor
-from ChannelManager import channelManager
-from Protocol import Protocol
+from common.CommandExecutor import CommandExecutor
+from common.ChannelManager import channelManager
+from common.Protocol import Protocol
 
 class ServerControllerCommandExecutor(CommandExecutor):
 	def __init__(self):

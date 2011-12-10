@@ -1,5 +1,5 @@
 import socket
-from ChannelManager import channelManager
+from common.ChannelManager import channelManager
 
 class Bootstrap:
 	def __init__(self):

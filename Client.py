@@ -1,6 +1,6 @@
-from ClientBootstrap import ClientBootstrap
-from ChannelPipelineFactory import ChannelPipelineFactory
-from ClientChannelHandler import ClientChannelHandler
+from client.ClientBootstrap import ClientBootstrap
+from common.ChannelPipelineFactory import ChannelPipelineFactory
+from client.ClientChannelHandler import ClientChannelHandler
 
 if '__main__' == __name__:
 	clientBootstrap = ClientBootstrap()

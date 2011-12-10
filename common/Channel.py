@@ -1,4 +1,4 @@
-from ChannelBuffer import ChannelBuffer
+from common.ChannelBuffer import ChannelBuffer
 
 class Channel:
 	def __init__(self, sock, address, uniqueID=1):

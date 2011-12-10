@@ -1,18 +1,22 @@
-from CommandExecutor import CommandExecutor
-import ClientData
+from common.CommandExecutor import CommandExecutor
+import client.ClientData
 import os
 import ftplib
-from Protocol import Protocol
-from ChannelBufferFactory import ChannelBufferFactory
+from common.Protocol import Protocol
+from common.ChannelBufferFactory import ChannelBufferFactory
 
 class ClientFtpDownloadNotify(CommandExecutor):
 	def __init__(self):
 		CommandExecutor.__init__(self)
 		
 	def onMessage(self, channel, data):
-		ClientData.ftp = ftplib.FTP(ClientData.ftpLoginData['IP'], ClientData.ftpLoginData['UserName'], ClientData.ftpLoginData['Password'])
+		client.ClientData.ftp = ftplib.FTP(
+			client.ClientData.ftpLoginData['IP'], 
+			client.ClientData.ftpLoginData['UserName'], 
+			client.ClientData.ftpLoginData['Password']
+			)
 		self.createDirectory(data)
-		fileList = ClientData.ftp.nlst(data)
+		fileList = client.ClientData.ftp.nlst(data)
 		self.saveFtpFiles(fileList)
 		print('download all files')
 		channel.write(ChannelBufferFactory.createChannelBuffer(Protocol.FTP_DOWNLOAD_RECEIVED, None))
@@ -29,6 +33,6 @@ class ClientFtpDownloadNotify(CommandExecutor):
 	def saveFtpFile(self, fileName):
 		print('create file: ', fileName)
 		f = open(fileName, 'wb')
-		ClientData.ftp.retrbinary('RETR ' + fileName, f.write) 
+		client.ClientData.ftp.retrbinary('RETR ' + fileName, f.write) 
 		f.close()
 

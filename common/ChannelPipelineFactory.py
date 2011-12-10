@@ -1,5 +1,5 @@
 import copy
-from ChannelPipeline import ChannelPipeline
+from common.ChannelPipeline import ChannelPipeline
 
 class ChannelPipelineFactory:
 	def __init__(self, *args):

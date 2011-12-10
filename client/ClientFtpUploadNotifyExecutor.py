@@ -1,16 +1,20 @@
-from CommandExecutor import CommandExecutor
-import ClientData
+from common.CommandExecutor import CommandExecutor
+from client import ClientData
 import os
 import ftplib
-from Protocol import Protocol
-from ChannelBufferFactory import ChannelBufferFactory
+from common.Protocol import Protocol
+from common.ChannelBufferFactory import ChannelBufferFactory
 
 class ClientFtpUploadNotify(CommandExecutor):
 	def __init__(self):
 		CommandExecutor.__init__(self)
 		
 	def onMessage(self, channel, data):
-		ClientData.ftp = ftplib.FTP(ClientData.ftpLoginData['IP'], ClientData.ftpLoginData['UserName'], ClientData.ftpLoginData['Password'])
+		ClientData.ftp = ftplib.FTP(
+			ClientData.ftpLoginData['IP'], 
+			ClientData.ftpLoginData['UserName'], 
+			ClientData.ftpLoginData['Password']
+			)
 		if os.path.isdir(data):
 			directoryInFtpServer = data + '_' + str(ClientData.uniqueID)
 			self.createDirectoryInFtpServer(data, directoryInFtpServer)

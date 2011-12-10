@@ -1,6 +1,6 @@
-from ChannelHandler import ChannelHandler
-from Protocol import Protocol
-from ControllerCommandReceivedExecutor import ControllerCommandReceivedExecutor
+from common.ChannelHandler import ChannelHandler
+from common.Protocol import Protocol
+from controller.ControllerCommandReceivedExecutor import ControllerCommandReceivedExecutor
 
 class ControllerChannelHandler(ChannelHandler):
 	def __init__(self):
@@ -9,7 +9,6 @@ class ControllerChannelHandler(ChannelHandler):
 
 	def channelConnected(self, channel):
 		print(channel.getAddress(), ' connected')
-		#self.sendProgramCommand(channel)
 
 	def channelClosed(self, channel):
 		print(channel.getAddress(), ' closed')

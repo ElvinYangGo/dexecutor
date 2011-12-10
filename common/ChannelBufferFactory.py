@@ -1,4 +1,4 @@
-from ChannelBuffer import ChannelBuffer
+from common.ChannelBuffer import ChannelBuffer
 import pickle
 
 class ChannelBufferFactory:

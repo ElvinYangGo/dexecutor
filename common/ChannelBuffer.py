@@ -1,5 +1,3 @@
-import struct
-
 class ChannelBuffer:
 	def __init__(self, data=None):
 		if None != data:

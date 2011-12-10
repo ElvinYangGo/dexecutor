@@ -1,4 +1,4 @@
-from CommandExecutor import CommandExecutor
+from common.CommandExecutor import CommandExecutor
 
 class ServerConfigReceivedExecutor(CommandExecutor):
 	def __init__(self):

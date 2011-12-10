@@ -1,5 +1,5 @@
 import struct
-from ChannelBuffer import ChannelBuffer
+from common.ChannelBuffer import ChannelBuffer
 
 class BufferHeadDecoder:
 	PACKET_HEAD_LENGTH = struct.calcsize('!i')

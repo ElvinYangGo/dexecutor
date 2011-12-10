@@ -1,4 +1,4 @@
-from ChannelBufferFactory import ChannelBufferFactory
+from common.ChannelBufferFactory import ChannelBufferFactory
 
 class ChannelManager:
 	def __init__(self):
