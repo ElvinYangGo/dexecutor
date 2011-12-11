@@ -6,10 +6,10 @@ import os
 def getInputAndSendToSock(sock):
 	while True:
 		lineData = sys.stdin.readline()
-		sock.sendall(lineData.replace('\n', '').encode('ascii'))
+		sock.sendall(lineData.replace('\n', '').handleDownStream('ascii'))
 		'''
 		while 0 < len(lineData):
-			sentSize = sock.send(lineData.encode('ascii'))
+			sentSize = sock.send(lineData.handleDownStream('ascii'))
 			lineData = lineData[sentSize:]
 		'''
 
@@ -40,4 +40,4 @@ class Stdio:
 
 	def read(self):
 		data = self.serverSockForInput.recv(1024)
-		return data.decode('ascii').replace(os.linesep, '')
+		return data.handleUpStream('ascii').replace(os.linesep, '')

@@ -1,8 +1,8 @@
 import socket
-from common.ChannelManager import channelManager
 
 class Bootstrap:
-	def __init__(self):
+	def __init__(self, channelManager):
+		self.channelManager = channelManager
 		self.RECV_SIZE = 4096
 		self.channels = {}
 		self.inputSockets = []
@@ -23,13 +23,13 @@ class Bootstrap:
 		else:
 			if data:
 				self.channels[sock].appendBytes(data)
-				self.channels[sock].handleReceivedBuffer()
+				self.channels[sock].handleUpStream()
 			else:
 				self.handleClose(sock)
 
 	def handleClose(self, sock):
-		self.channels[sock].handleChannelClosed()
-		channelManager.removeChannel(self.channels[sock])
+		self.channels[sock].handleDisconnected()
+		self.channelManager.removeChannel(self.channels[sock])
 		del self.channels[sock]
 		self.inputSockets.remove(sock)
 		sock.close()

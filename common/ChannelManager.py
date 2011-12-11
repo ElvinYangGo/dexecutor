@@ -21,4 +21,3 @@ class ChannelManager:
 		self.id += 1
 		return self.id
 				
-channelManager = ChannelManager()

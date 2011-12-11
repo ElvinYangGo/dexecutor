@@ -2,11 +2,10 @@ import socket
 import select
 from common.Bootstrap import Bootstrap
 from common.Channel import Channel
-from common.ChannelManager import channelManager
 
 class ServerBootstrap(Bootstrap):
-	def __init__(self):
-		Bootstrap.__init__(self)
+	def __init__(self, channelManager):
+		Bootstrap.__init__(self, channelManager)
 
 	def bindServer(self, ip, port):
 		self.LISTEN_BACKLOG = 5
@@ -28,9 +27,9 @@ class ServerBootstrap(Bootstrap):
 		newSock, newAddress = self.serverSocket.accept()
 		newSock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
 		self.inputSockets.append(newSock)
-		channel = Channel(newSock, newAddress, channelManager.generatorID())
+		channel = Channel(newSock, newAddress, self.channelManager.generatorID())
 		channelPipeline = self.channelPipelineFactory.createChannelPipeline()
 		self.relateChannelWithPipeline(channel, channelPipeline)
 		self.channels[newSock] = channel
-		channelManager.addChannel(channel)
+		self.channelManager.addChannel(channel)
 		channel.handleConnected()

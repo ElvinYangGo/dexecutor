@@ -9,10 +9,10 @@ class BufferHeadDecoderTest(unittest.TestCase):
 	def testDecode(self):
 		stringBytes = bytes('abcde', 'utf8')
 		encoder = BufferHeadEncoder()
-		channelBufferEncoded = encoder.encode(ChannelBuffer(stringBytes))
+		channelBufferEncoded = encoder.handleDownStream(ChannelBuffer(stringBytes))
 
 		decoder = BufferHeadDecoder()
-		channelBufferDecoded = decoder.decode(channelBufferEncoded)
+		channelBufferDecoded = decoder.handleUpStream(channelBufferEncoded)
 		self.assertEqual(stringBytes, channelBufferDecoded.getAllBytes())
 		self.assertEqual(0, channelBufferEncoded.readableBytes())
 

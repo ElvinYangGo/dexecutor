@@ -1,10 +1,10 @@
 from common.CommandExecutor import CommandExecutor
-from common.ChannelManager import channelManager
 from common.Protocol import Protocol
 
 class ServerControllerCommandExecutor(CommandExecutor):
-	def __init__(self):
+	def __init__(self, channelManager):
 		CommandExecutor.__init__(self)
+		self.channelManager = channelManager
 		self.dispatcher = {}
 		self.dispatcher['send_ftp_data'] = self.onFtpLoginData
 		self.dispatcher['download'] = self.onDownload
@@ -38,16 +38,16 @@ class ServerControllerCommandExecutor(CommandExecutor):
 				'UserName':'test',
 				'Password':'test'
 				}
-		channelManager.sendToAllChannelsExcept(channel, Protocol.FTP_LOGIN_DATA_NOTIFY, ftpData)
+		self.channelManager.sendToAllChannelsExcept(channel, Protocol.FTP_LOGIN_DATA_NOTIFY, ftpData)
 
 	def onDownload(self, channel, controllerData):
-		channelManager.sendToAllChannelsExcept(channel, Protocol.FTP_DOWNLOAD_NOTIFY, controllerData)
+		self.channelManager.sendToAllChannelsExcept(channel, Protocol.FTP_DOWNLOAD_NOTIFY, controllerData)
 
 	def onUpload(self, channel, controllerData):
-		channelManager.sendToAllChannelsExcept(channel, Protocol.FTP_UPLOAD_NOTIFY, controllerData)
+		self.channelManager.sendToAllChannelsExcept(channel, Protocol.FTP_UPLOAD_NOTIFY, controllerData)
 	
 	def onRun(self, channel, controllerData):
-		channelManager.sendToAllChannelsExcept(channel, Protocol.RUN_COMMAND_NOTIFY, controllerData)
+		self.channelManager.sendToAllChannelsExcept(channel, Protocol.RUN_COMMAND_NOTIFY, controllerData)
 		
 	def onStop(self, channel, controllerData):
-		channelManager.sendToAllChannelsExcept(channel, Protocol.STOP_COMMAND_NOTIFY, controllerData)
+		self.channelManager.sendToAllChannelsExcept(channel, Protocol.STOP_COMMAND_NOTIFY, controllerData)

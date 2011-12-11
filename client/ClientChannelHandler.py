@@ -17,8 +17,8 @@ class ClientChannelHandler(ChannelHandler):
 		self.registerExecutor(Protocol.STOP_COMMAND_NOTIFY, ClientStopCommandNotifyExecutor())
 		self.registerExecutor(Protocol.CONFIG_NOTIFY, ClientConfigNotifyExecutor())
 
-	def channelConnected(self, channel):
+	def handleConnected(self, channel):
 		print(channel.getAddress(), ' connected')
 
-	def channelClosed(self, channel):
+	def handleDisconnected(self, channel):
 		print(channel.getAddress(), ' closed')

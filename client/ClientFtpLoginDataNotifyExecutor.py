@@ -1,5 +1,5 @@
 from common.CommandExecutor import CommandExecutor
-import client.ClientData
+from client import ClientData
 from common.ChannelBufferFactory import ChannelBufferFactory
 from common.Protocol import Protocol
 
@@ -8,5 +8,5 @@ class ClientFtpLoginDataNotifyExecutor(CommandExecutor):
 		CommandExecutor.__init__(self)
 		
 	def onMessage(self, channel, data):
-		client.ClientData.ftpLoginData = data
+		ClientData.ftpLoginData = data
 		channel.write(ChannelBufferFactory.createChannelBuffer(Protocol.FTP_LOGIN_DATA_RECEIVED, None))

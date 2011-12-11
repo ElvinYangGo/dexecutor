@@ -17,10 +17,10 @@ class ChannelPipelineTest(unittest.TestCase):
 		self.assertEqual(1, self.channelPipeline.handlerCount())
 
 	def testHandleChannelConnected(self):
-		self.channelPipeline.handleChannelConnected()
+		self.channelPipeline.handleConnected()
 
 	def testHandleChannelClosed(self):
-		self.channelPipeline.handleChannelClosed()
+		self.channelPipeline.handleDisconnected()
 
 def getTests():
 	return unittest.makeSuite(ChannelPipelineTest)

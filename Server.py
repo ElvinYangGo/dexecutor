@@ -1,11 +1,13 @@
 from server.ServerBootstrap import ServerBootstrap
-from common.ChannelPipelineFactory import ChannelPipelineFactory
-from server.ServerChannelHandler import ServerChannelHandler
+from server.ServerChannelPipelineFactory import ServerChannelPipelineFactory
+from common.ChannelManager import ChannelManager
 import time
 
 if '__main__' == __name__:
-	serverBootstrap = ServerBootstrap()
-	serverBootstrap.setPipelineFactory(ChannelPipelineFactory(ServerChannelHandler()))
+	channelManager = ChannelManager()
+	serverChannelPipelineFactory = ServerChannelPipelineFactory(channelManager)
+	serverBootstrap = ServerBootstrap(channelManager)
+	serverBootstrap.setPipelineFactory(serverChannelPipelineFactory)
 	serverBootstrap.bindServer('localhost', 23567)
 	while True:
 		serverBootstrap.serveOnce()

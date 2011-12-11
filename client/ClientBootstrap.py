@@ -2,10 +2,11 @@ import socket
 import select
 from common.Bootstrap import Bootstrap
 from common.Channel import Channel
+from common.ChannelManager import ChannelManager
 
 class ClientBootstrap(Bootstrap):
 	def __init__(self):
-		Bootstrap.__init__(self)
+		Bootstrap.__init__(self, ChannelManager())
 
 	def connect(self, ip, port):
 		clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

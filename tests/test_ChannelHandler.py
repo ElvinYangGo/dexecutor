@@ -25,7 +25,7 @@ class ChannelHandlerTest(unittest.TestCase):
 				}
 		pickleBytes = pickle.dumps(message)
 		channel = Mock()
-		self.channelHandler.messageReceived(channel, ChannelBuffer(pickleBytes))
+		self.channelHandler.handleUpStream(channel, ChannelBuffer(pickleBytes))
 		self.ftpExecutor.handleCommand.assert_called_with(channel, command)
 
 

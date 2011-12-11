@@ -11,7 +11,7 @@ class BufferHeadEncoderTest(unittest.TestCase):
 
 		buffer = struct.pack('!i' + str(len(stringBytes)) + 's', len(stringBytes), stringBytes)
 		encoder = BufferHeadEncoder()
-		channelBufferToCheck = encoder.encode(channelBuffer)
+		channelBufferToCheck = encoder.handleDownStream(channelBuffer)
 		self.assertEqual(buffer, channelBufferToCheck.getAllBytes())
 
 def getTests():

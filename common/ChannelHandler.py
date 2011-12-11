@@ -4,11 +4,10 @@ class ChannelHandler:
 	def __init__(self):
 		self.executors = {}
 
-	def channelConnected(self, channel):
+	def handleConnected(self, channel):
 		pass
-#		print(channel.getAddress(), ' connected')
 
-	def messageReceived(self, channel, channelBuffer):
+	def handleUpStream(self, channel, channelBuffer):
 		message = pickle.loads(channelBuffer.readAllBytes())
 		print(message)
 		messageID = message['ID']
@@ -16,9 +15,8 @@ class ChannelHandler:
 		if executor != None:
 			executor.onMessage(channel, message['Data'])		
 	
-	def channelClosed(self, channel):
+	def handleDisconnected(self, channel):
 		pass
-#		print(channel.getAddress(), ' closed')
 
 	def registerExecutor(self, messageID, executor):
 		self.executors[messageID] = executor

@@ -26,13 +26,13 @@ class Channel:
 		self.channelBuffer.append(data)
 	
 	def handleConnected(self):
-		self.channelPipeline.handleChannelConnected()
+		self.channelPipeline.handleConnected()
 	
-	def handleReceivedBuffer(self):
-		self.channelPipeline.handleReceivedBuffer(self.channelBuffer)
+	def handleUpStream(self):
+		self.channelPipeline.handleUpStream(self.channelBuffer)
 	
 	def write(self, channelBuffer):
-		self.channelPipeline.handleWrite(channelBuffer, self.sock)
+		self.channelPipeline.handleDownStream(channelBuffer, self.sock)
 
-	def handleChannelClosed(self):
-		self.channelPipeline.handleChannelClosed()
+	def handleDisconnected(self):
+		self.channelPipeline.handleDisconnected()

@@ -7,8 +7,8 @@ class ControllerChannelHandler(ChannelHandler):
 		ChannelHandler.__init__(self)
 		self.registerExecutor(Protocol.CONTROLLER_COMMAND_RECEIVED, ControllerCommandReceivedExecutor())
 
-	def channelConnected(self, channel):
+	def handleConnected(self, channel):
 		print(channel.getAddress(), ' connected')
 
-	def channelClosed(self, channel):
+	def handleDisconnected(self, channel):
 		print(channel.getAddress(), ' closed')
